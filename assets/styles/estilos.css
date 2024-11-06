@@ -185,6 +185,30 @@ body {
 #section2 { background-color: #e3f2fd; }
 #section3 { background-color: #f3e5f5; }
 
+/* Indicador de scroll */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    color: #4CAF50;
+    font-size: 2rem;
+}
+
+/* Animación de rebote */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
 
 .footer {
     background-color: #2c3e50;

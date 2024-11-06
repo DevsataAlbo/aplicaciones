@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Huerta en Casa</title>
+    <!-- awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="assets/styles/estilos.css" />
+    <link rel="stylesheet" href="assets/styles/estilo_calculadora.css" />
+    <link rel="stylesheet" href="assets/styles/estilos_form_galery.css" />
+  </head>
+  <body>
+    <!-- Overlay para cuando el menú está abierto -->
+    <div class="overlay"></div>
+
+    <button class="menu-btn">
+      <div class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <div class="menu">
+      <h2>Menú</h2>
+      <ul class="menu-items">
+        <li>
+          <a href="#" class="active">
+            <i>🏠</i>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#calculadora">
+            <i>🧮</i>
+            Calculadora
+          </a>
+        </li>
+        <li>
+          <a href="#comunidad">
+            <i>👥</i>
+            Comunidad
+            <span class="notification-badge">3</span>
+          </a>
+        </li>
+        <li>
+          <a href="#publicatuhuerto">
+            <i>🌱</i>
+            Comparte tu huerta
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Secciones de contenido -->
+    <section class="section" id="section1">
+      <div class="text-container" id="text1">
+        Cultivar tus propios alimentos te permite disfrutar de productos
+        frescos, libres de químicos y llenos de nutrientes, además de reducir tu
+        huella ecológica. Es una práctica que conecta con la tierra y aporta a
+        la seguridad alimentaria.
+      </div>
+    </section>
+
+    <section class="section" id="section2">
+      <div class="text-container" id="text2">
+        Unirse a comunidades de personas con huertas en casa te permite
+        compartir conocimientos, experiencias y técnicas. Además, te brinda
+        apoyo y motivación para mantener y mejorar tu propia huerta, formando
+        redes de colaboración y aprendizaje.
+      </div>
+    </section>
+
+    <section class="section" id="section3">
+      <div class="text-container" id="text3">
+        ¡Empieza hoy tu propia huerta! Únete a nuestra comunidad compartiendo
+        fotos y avances de tu huerta, y ayuda a inspirar a otros en este camino
+        hacia una vida más sostenible y saludable.
+      </div>
+    </section>
+
+    <!-- Secciones calculadora -->
+
+    <!-- Inicio Section Calculadora -->
+    <section
+      class="fondocalculadora row px-5 mx-auto container"
+      id="calculadora"
+    >
+      <h2 class="titulo py-3">Calculadora de Plantación de Lechugas</h2>
+      <form
+        id="formularioLechugas"
+        class="col-md-5 px-3"
+        onsubmit="calcular(event)"
+      >
+        <div class="form-group">
+          <label for="numeroLechugas">Número de Lechugas:</label>
+          <input type="number" id="numeroLechugas" required min="1" />
+        </div>
+
+        <div class="form-group">
+          <label for="tipoPlantacion">Tipo de Plantación:</label>
+          <select id="tipoPlantacion" onchange="mostrarOpciones()" required>
+            <option value="">Seleccione una opción</option>
+            <option value="tierra">Tierra Directa</option>
+            <option value="macetero">Macetero</option>
+          </select>
+        </div>
+
+        <div id="tipoMacetero" class="form-group" style="display: none">
+          <label for="formaMacetero">Forma del Macetero:</label>
+          <select
+            id="formaMacetero"
+            onchange="mostrarMedidas()"
+            required
+            disabled
+          >
+            <option value="">Seleccione una forma</option>
+            <option value="circular">Circular</option>
+            <option value="rectangular">Rectangular</option>
+          </select>
+        </div>
+
+        <div id="medidasCircular" class="medidas-container">
+          <div class="form-group">
+            <label for="diametro">Diámetro (cm):</label>
+            <input type="number" id="diametro" min="1" />
+          </div>
+          <div class="form-group">
+            <label for="alturaCircular">Altura (cm):</label>
+            <input type="number" id="alturaCircular" min="1" />
+          </div>
+        </div>
+
+        <div id="medidasRectangular" class="medidas-container">
+          <div class="form-group">
+            <label for="largo">Largo (cm):</label>
+            <input type="number" id="largo" min="1" />
+          </div>
+          <div class="form-group">
+            <label for="ancho">Ancho (cm):</label>
+            <input type="number" id="ancho" min="1" />
+          </div>
+          <div class="form-group">
+            <label for="alturaRectangular">Altura (cm):</label>
+            <input type="number" id="alturaRectangular" min="1" />
+          </div>
+        </div>
+
+        <button type="submit">Calcular</button>
+      </form>
+
+      <div class="col-md-5 px-3 ms-auto">
+        <div id="resultado"></div>
+      </div>
+    </section>
+    <!-- Fin Section Calculadora -->
+
+    <!-- Inicio Fomulario y galeria -->
+    <div class="gallery-container">
+      <h2 class="titulo py-3 my-3" id="comunidad">
+        Huertos de nuestra comunidad
+      </h2>
+
+      <!-- Imprimir imagenes -->
+      <div class="gallery" id="gallery">
+        <!-- Las imágenes se cargaran desde el formulario -->
+      </div>
+      <!-- Fin imprimir imagenes -->
+
+      <!-- Estructura Galeria de imagenes -->
+      <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <button class="lightbox-prev" onclick="changeImage(-1)">❮</button>
+        <button class="lightbox-next" onclick="changeImage(1)">❯</button>
+        <div class="lightbox-content">
+          <img src="" alt="" id="lightbox-img" />
+          <h3 id="lightbox-nombre"></h3>
+          <p id="lightbox-comuna"></p>
+          <p id="lightbox-contenido"></p>
+          <div id="lightbox-social"></div>
+        </div>
+      </div>
+      <!-- Fin Estructura galeria de imagenes -->
+    </div>
+    <!-- Fin formulario y galeria -->
+
+    <div id="publicatuhuerto">
+      <h2 class="titulo py-3 my-3">Comparte tu Huerto</h2>
+      <!-- Formulario de carga -->
+      <form class="upload-form" id="uploadForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="nombre">Nombre *</label>
+          <input type="text" id="nombre" required />
+        </div>
+
+        <div class="form-group">
+          <label for="comuna">Comuna *</label>
+          <input type="text" id="comuna" required />
+        </div>
+
+        <div class="form-group">
+          <label for="contenido">¿Qué contiene tu huerto? *</label>
+          <textarea id="contenido" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="imagen">Seleccionar una imagen *</label>
+          <input type="file" id="imagen" accept="image/*" required />
+        </div>
+
+        <div class="form-group">
+          <label>Redes Sociales (opcional)</label>
+          <div class="social-links">
+            <input
+              type="text"
+              id="instagram"
+              placeholder="Usuario de Instagram"
+            />
+            <input
+              type="text"
+              id="facebook"
+              placeholder="Usuario de Facebook"
+            />
+          </div>
+        </div>
+        <button type="submit" class="submit-button">Compartir</button>
+      </form>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Huerta en Casa</h3>
+                <p>Promoviendo la agricultura urbana sustentable y la autosuficiencia alimentaria en cada hogar.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#calculadora">Calculadora</a></li>
+                    <li><a href="#comunidad">Comunidad</a></li>
+                    <li><a href="#publicatuhuerto">Comparte tu Huerto</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Huerta en Casa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="assets/scripts/scripts.js"></script>
+    <script src="assets/scripts/app.js"></script>
+    <script src="assets/scripts/formularioYGaleria.js"></script>
+  </body>
+</html>
